@@ -1,0 +1,88 @@
+
+version: "3"
+services:
+  emq:
+    image: emqttd-docker-v2.3.9
+    ports:
+      - "18083:18083"
+    expose:
+      - "1883"
+      - "8083"
+      - "8883"
+      - "8084"
+  # jaeger:
+  #   image: jaegertracing/all-in-one:latest
+  #   ports:
+  #     - "16686:16686"
+  #     - "5775:5775/udp"
+  #     - "6831:6831/udp"
+  #     - "6832:6832/udp"
+  #     - "14268:14268"
+ 
+  jaeger-collector:
+    image: jaegertracing/jaeger-collector
+    command: ["/go/bin/collector-linux", "--cassandra.keyspace=jaeger_v1_dc1", "--cassandra.servers=cassandra", "--collector.zipkin.http-port=9411"]
+    ports:
+      - "14269"
+      - "14268:14268"
+      - "14267:14267"
+      - "9411:9411"
+    restart: on-failure
+    depends_on:
+      - cassandra-schema
+
+  jaeger-query:
+    image: jaegertracing/jaeger-query
+    command: ["/go/bin/query-linux", "--query.static-files=/go/jaeger-ui/", "--cassandra.keyspace=jaeger_v1_dc1", "--cassandra.servers=cassandra"]
+    ports:
+      - "16686:16686"
+      - "16687"
+    restart: on-failure
+    depends_on:
+      - cassandra-schema
+
+  jaeger:
+    image: jaegertracing/jaeger-agent
+    command: ["/go/bin/agent-linux", "--collector.host-port=jaeger-collector:14267"]
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+    restart: on-failure
+    depends_on:
+      - jaeger-collector
+
+  cassandra:
+    image: cassandra:3.9
+    ports:
+      - "9042"
+      - "7000"
+
+  cassandra-schema:
+    image: jaegertracing/jaeger-cassandra-schema
+    depends_on:
+      - cassandra
+
+
+
+
+  publisher:
+    build:
+        context: ./publisher
+    depends_on:
+      - emq
+      - jaeger
+  subscriber:
+    build:
+        context: ./subscriber
+    depends_on:
+      - emq
+      - jaeger
+  # deploy:
+  #   replicas: 2
+  #   update_config:
+  #     parallelism: 2
+  #     delay: 10s
+  #   restart_policy:
+  #     condition: on-failure

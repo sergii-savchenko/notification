@@ -1,0 +1,19 @@
+{
+  "name": "mqtt_publisher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pub.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo 'sleep 30..' && sleep 30 && node ./pub.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@risingstack/jaeger": "^2.5.0",
+    "jaeger-client": "^3.10.0",
+    "mqtt": "^2.18.0",
+    "opentracing": "^0.14.3",
+    "uuid": "^3.2.1"
+  }
+}
