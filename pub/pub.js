@@ -23,9 +23,11 @@ client.on('connect', function () {
   loop()
 })
 
-(function loop1000() {
+const loop1000 = ()=> {
   return delay(1000).then(function() {
     console.log(stats)
     stats = 0;
   }).then(loop1000);
-})()
+}
+
+loop1000()
