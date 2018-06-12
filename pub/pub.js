@@ -1,8 +1,8 @@
-var mqtt = require('mqtt')
+const mqtt = require('mqtt')
+const uuidv4 = require('uuid/v4')
+const delay = require('delay')
+
 var client  = mqtt.connect('mqtt://emq')
-
-const uuidv4 = require('uuid/v4');
-
 
 client.on('connect', function () {
     
