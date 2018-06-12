@@ -83,7 +83,11 @@ services:
         context: ./sub
     depends_on:
       - emq
-
+  sub200:
+    build:
+        context: ./sub200
+    depends_on:
+      - emq
   publisher:
     build:
         context: ./publisher
