@@ -6,7 +6,6 @@ var client  = mqtt.connect('mqtt://emq')
 var stats = 0
 
 client.on('connect', function () {
-    
   (function loop() {
       return delay(0).then(function() {
         client.publish('loadtest', JSON.stringify({
@@ -21,13 +20,11 @@ client.on('connect', function () {
           stats++;
       }).then(loop);
   })()
-    
-
-  (function loop1000() {
-    return delay(1000).then(function() {
-      console.log(stats)
-      stats = 0;
-    }).then(loop1000);
-  })()
-
 })
+
+(function loop1000() {
+  return delay(1000).then(function() {
+    console.log(stats)
+    stats = 0;
+  }).then(loop1000);
+})()
