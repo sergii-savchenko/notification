@@ -16,7 +16,7 @@ client.on('connect', function () {
             open: 0.4,
             close: 0.5,
             volume: 111111111
-          }})
+          }}))
       }).then(loop);
   })()
     
