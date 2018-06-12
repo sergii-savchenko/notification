@@ -70,14 +70,11 @@ services:
         context: ./pub
     depends_on:
       - emq
-      - jaeger
   sub:
     build:
         context: ./sub
     depends_on:
       - emq
-      - jaeger
-
 
   publisher:
     build:
