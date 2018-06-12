@@ -1,7 +1,6 @@
 var mqtt = require('mqtt')
 //---Tracer
 
-const uuidv4 = require('uuid/v4');
 var jaeger = require('jaeger-client');
 
 // -- CONFIG
@@ -10,9 +9,6 @@ var clients = []
 var done = 0
 var perSecond = 0
 // ---
-
-
-
 
 // See schema https://github.com/jaegertracing/jaeger-client-node/blob/master/src/configuration.js#L37
 
@@ -51,11 +47,6 @@ const printSpanDetails = (span) => {
 var tracer = jaeger.initTracer(config, options);
 
 //----
-
-
-
-
-
 
 for (let i=0;i<clientQty; i++) {
   let client  = mqtt.connect('ws://emq:8083/mqtt')
