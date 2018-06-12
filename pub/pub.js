@@ -28,6 +28,6 @@ client.on('connect', function () {
       console.log(stats)
       stats = 0;
     }).then(loop1000);
-})()
+  })()
 
 })
