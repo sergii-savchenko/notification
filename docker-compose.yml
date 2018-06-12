@@ -65,7 +65,7 @@ services:
       - cassandra
   pub100ms:
     build:
-        context: ./pub1s
+        context: ./pub100ms
     depends_on:
       - emq
   pub1s:
