@@ -27,7 +27,7 @@ client.on('connect', function () {
     return delay(1000).then(function() {
       console.log(stats)
       stats = 0;
-    }).then(loop);
+    }).then(loop1000);
 })()
 
 })
