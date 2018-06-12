@@ -82,7 +82,7 @@ client.on('connect', function () {
     }
   
     perSecond++
-  }, 0)
+  }, 100)
 })
 
 setInterval(()=>{

@@ -4,7 +4,7 @@ var mqtt = require('mqtt')
 var jaeger = require('jaeger-client');
 
 // -- CONFIG
-var clientQty = 10
+var clientQty = 20
 var clients = []
 var done = 0
 var perSecond = 0
@@ -34,7 +34,7 @@ const config = {
 
 var options = {
   tags: {
-    'publisher.version': '0.0.1',
+    'subscriber.version': '0.0.1',
   }
 };
 
