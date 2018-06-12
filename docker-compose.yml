@@ -63,7 +63,11 @@ services:
     image: jaegertracing/jaeger-cassandra-schema
     depends_on:
       - cassandra
-
+  pub100ms:
+    build:
+        context: ./pub1s
+    depends_on:
+      - emq
   pub1s:
     build:
         context: ./pub1s
