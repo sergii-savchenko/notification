@@ -3,10 +3,10 @@ const uuidv4 = require('uuid/v4')
 const delay = require('delay')
 
 var client  = mqtt.connect('mqtt://emq')
-var stats = 0
+var stats = 0;
 
 client.on('connect', function () {
-  (function loop() {
+  let loop = ()=>{
       return delay(0).then(function() {
         client.publish('loadtest', JSON.stringify({
           uuid: uuidv4(),
@@ -19,7 +19,8 @@ client.on('connect', function () {
           }}));
           stats++;
       }).then(loop);
-  })()
+  }
+  loop()
 })
 
 (function loop1000() {
