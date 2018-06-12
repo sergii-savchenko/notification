@@ -64,7 +64,11 @@ services:
     depends_on:
       - cassandra
 
-
+  pub1s:
+    build:
+        context: ./pub1s
+    depends_on:
+      - emq
   pub:
     build:
         context: ./pub
