@@ -1,0 +1,16 @@
+{
+  "name": "mqtt_publisher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pub.js",
+  "scripts": {
+    "start": "node ./pub.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "delay": "^3.0.0",
+    "mqtt": "^2.18.0",
+    "uuid": "^3.2.1"
+  }
+}
